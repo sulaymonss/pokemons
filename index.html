@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokemons</title>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+    
+    <header class="header">
+        <div class="container">
+            <img src="./img/pokemon_logo.png" alt="logo" class="header__logo" width="610" height="225">
+            <button class="header__btn" type="button"><i class="far fa-heart"></i></button>
+        </div>
+    </header>
+
+    <main class="main">
+        <section class="pokemons">
+            <div class="container">
+                <form class="form">
+                    <select class="filter_input pokemons__type">
+                        <option value="all" class="pokemons__option">All</option>
+                    </select>
+                    <div class="search_wrapper">
+                        <input type="text" class="search_input pokemons__search" placeholder="Search ...">
+                        <span class="search_icon"><i class="fas fa-search"></i></span>
+                    </div>
+                    <select class="filter_input pokemons__filter">
+                        <option value="all" class="pokemons__option">All</option>
+                        <option value="a-z" class="pokemons__option">Aa-Zz</option>
+                        <option value="z-a" class="pokemons__option">Zz-Aa</option>
+                    </select>
+                    <button type="submit" class="pokemons__btn">Button</button>
+                </form>
+
+                <ul class="pokemons__list"></ul>
+
+                <div class="cart">
+                    <div class="cart_wrapper">
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                </div>
+
+                <template id="template">
+                    <li class="pokemons__card">
+                        <img class="pokemons__img" src="https://picsum.photos/157" alt="pokemon img">
+                        <hr class="pokemons__line">
+                        <div class="pokemons__content">
+                            <div class="pokemons__header">
+                                <h3 class="pokemons__title">Pokemon</h3>
+                                <button class="pokemons__item-btn"><i class="far fa-heart"></i></button>
+                            </div>
+                            <p class="pokemons__type2">Grass, Poison</p>
+                            <div class="pokemons__wh">
+                                <p class="pokemons__weight">6.9kg</p>
+                                <p class="pokemons__height">0.9m</p>
+                            </div>
+                        </div>
+                    </li>
+                </template>
+            </div>
+        </section>
+    </main>
+
+
+    <script src="./js/pokemons.js"></script>
+    <script src="./js/util.js"></script>
+    <script src="./js/index.js"></script>
+</body>
+</html>
