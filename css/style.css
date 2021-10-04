@@ -37,6 +37,7 @@ img{
 }
 
 .header__btn{
+    position: relative;
     background-color: transparent;
     border: none;
     font-size: 45px;
@@ -44,6 +45,20 @@ img{
     top: 0;
     right: 15px;
     cursor: pointer;
+}
+
+.count{
+    position: absolute;
+    top: 30px;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: red;
 }
 
 .header__logo{
@@ -156,10 +171,13 @@ img{
 }
 
 .pokemons__item-btn{
-    background-color: transparent;
-    border: none;
-    font-size: 28px;
+    display: none;
+}
+
+.heart2{
+    font-size: 23px;
     cursor: pointer;
+    color: #888;
 }
 
 .pokemons__type2{
@@ -221,14 +239,6 @@ img{
 .cart_active{
     display: flex;
 }
-
-/* ---------------- */
-
-.btn-clr{
-    color: red;
-}
-
-/* -----------------*/
 
 ::-webkit-scrollbar {
     display: none;

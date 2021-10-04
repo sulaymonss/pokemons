@@ -13,10 +13,13 @@
     <header class="header">
         <div class="container">
             <img src="./img/pokemon_logo.png" alt="logo" class="header__logo" width="610" height="225">
-            <button class="header__btn" type="button"><i class="far fa-heart"></i></button>
+            <button class="header__btn" type="button">
+                <i class="far fa-heart"></i>
+                <span class="count">0</span>
+            </button>
         </div>
     </header>
-
+    
     <main class="main">
         <section class="pokemons">
             <div class="container">
@@ -35,15 +38,9 @@
                     </select>
                     <button type="submit" class="pokemons__btn">Button</button>
                 </form>
-
+                
                 <ul class="pokemons__list"></ul>
-
-                <div class="cart">
-                    <div class="cart_wrapper">
-                        <i class="fas fa-chevron-right"></i>
-                    </div>
-                </div>
-
+                
                 <template id="template">
                     <li class="pokemons__card">
                         <img class="pokemons__img" src="https://picsum.photos/157" alt="pokemon img">
@@ -51,7 +48,8 @@
                         <div class="pokemons__content">
                             <div class="pokemons__header">
                                 <h3 class="pokemons__title">Pokemon</h3>
-                                <button class="pokemons__item-btn"><i class="far fa-heart"></i></button>
+                                <label for="btn"><i class="fas fa-heart heart2"></i></label>  
+                                <input type="checkbox" class="pokemons__item-btn" id="btn">
                             </div>
                             <p class="pokemons__type2">Grass, Poison</p>
                             <div class="pokemons__wh">
@@ -61,11 +59,20 @@
                         </div>
                     </li>
                 </template>
+
+                <!---- modal ---->
+                
+                <div class="cart">
+                    <div class="cart_wrapper">
+                        <i class="fas fa-chevron-right"></i>
+                        <ul class="modal__card"></ul>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
-
-
+    
+    
     <script src="./js/pokemons.js"></script>
     <script src="./js/util.js"></script>
     <script src="./js/index.js"></script>

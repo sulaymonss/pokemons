@@ -7,8 +7,9 @@ const elCart = selectElem('.cart');
 const elCartWrapper = selectElem('.cart_wrapper', elCart);
 const elCloseBtn = selectElem('.fa-chevron-right');
 const elTemplate = selectElem('#template').content;
-
 const cartBtn = selectElem('.header__btn');
+const modalCard = selectElem('.modal__card');
+const elCounter = selectElem('.count');
 
 // modal-cart 
 
@@ -21,17 +22,11 @@ elCloseBtn.addEventListener('click', () =>{
     elCart.classList.remove('cart_active')
 });
 
-// elCart.addEventListener('click', evt =>{
-//     const cartId = evt.target.dataset.cart
-//     if(cartId == 1){
-//         elCart.classList.remove('modal-active')    
-//     }
-// });
 // rendering pokemons
+let result = [];
 
 function renderPokemons(pokemonsArr, element){
     element.innerHTML = null;
-    
     pokemonsArr.forEach((pokemon) =>{
         const cloneTemplate = elTemplate.cloneNode(true);
         
@@ -41,53 +36,61 @@ function renderPokemons(pokemonsArr, element){
         selectElem('.pokemons__weight', cloneTemplate).textContent = pokemon.weight;
         selectElem('.pokemons__height', cloneTemplate).textContent = pokemon.height;
         
-        const elPokemonBtn = selectElem('.pokemons__item-btn', cloneTemplate);
+        const elPokemonBtn = selectElem('.heart2', cloneTemplate);
         elPokemonBtn.dataset.id = pokemon.id;
-        let cartItem = elPokemonBtn.parentElement.parentElement.parentElement
         
-        elPokemonBtn.addEventListener('click', () =>{
-            elCartWrapper.appendChild(cartItem)
-        });
+        elPokemonBtn.addEventListener('click', (e) =>{
+            let itemId = e.target.dataset.id;
+            
+            let foundPokemon = pokemons.find((pokemon) => pokemon.id == itemId);
+            let findIndex = result.findIndex((pokemon) => pokemon.id == itemId);
+            
+            if(e.target){
+                if(!result.includes(foundPokemon)){
+                    result.push(foundPokemon)
+                }
+            }else{
+                result.splice(findIndex, 1)
+            }
+            
+            function renderModalPokemons(arr, element){
+                element.innerHTML = null;
+                
+                elCounter.textContent = result.length;
+                
+                arr.forEach((pokemon) =>{
+                    const cloneTemplate = elTemplate.cloneNode(true);
+                    
+                    selectElem('.pokemons__img', cloneTemplate).src = pokemon.img;
+                    selectElem('.pokemons__title', cloneTemplate).textContent = pokemon.name;
+                    selectElem('.pokemons__type2', cloneTemplate).textContent = pokemon.type;
+                    selectElem('.pokemons__weight', cloneTemplate).textContent = pokemon.weight;
+                    selectElem('.pokemons__height', cloneTemplate).textContent = pokemon.height;
+                    const elPokemonBtn = selectElem('.heart2', cloneTemplate);
+                    elPokemonBtn.dataset.id = pokemon.id;
+                    
+                    elPokemonBtn.addEventListener('click', (e) =>{
+                        const dataId = e.target.dataset.id
+                        
+                        const findIndex = result.findIndex(pokemon => pokemon.id == dataId)
+                        
+                        result.splice(findIndex, 1)
+                        
+                        renderModalPokemons(result, modalCard)
+                        
+                    })
+                    
+                    element.appendChild(cloneTemplate)
+                })
+            }
+            renderModalPokemons(result, modalCard)
+        })
         
         element.appendChild(cloneTemplate);
     })
 }
 
 renderPokemons(pokemons, elList);
-
-// Add to cart button:
-
-// function addToCart(event){
-//     let button = event.target;
-//     let cardItem = button.parentElement.parentElement.parentElement;
-//     let title = cardItem.getElementsByClassName('pokemons__title')[0].innerText;
-//     let type = cardItem.getElementsByClassName('pokemons__type2')[0].innerText;
-//     let weight = cardItem.getElementsByClassName('pokemons__weight')[0].innerText;
-//     let height = cardItem.getElementsByClassName('pokemons__height')[0].innerText;
-//     addItemToCard(title, type, weight, height)
-// }
-
-// function addItemToCard(title, type, weight, height){
-//     let cartItem = document.createElement('div');
-//     cartItemContents = `
-//     <li class="pokemons__card">
-//         <img class="pokemons__img" src="https://picsum.photos/157" alt="pokemon img">
-//         <hr class="pokemons__line">
-//         <div class="pokemons__content">
-//             <div class="pokemons__header">
-//                 <h3 class="pokemons__title">${title}</h3>
-//                 <button class="pokemons__item-btn"><i class="far fa-heart"></i></button>
-//             </div>
-//             <p class="pokemons__type2">${type}</p>
-//             <div class="pokemons__wh">
-//                 <p class="pokemons__weight">${weight}</p>
-//                 <p class="pokemons__height">${height}</p>
-//             </div>
-//         </div>
-//     </li>`
-//     cartItem.innerHTML = cartItemContents;
-//     elCartWrapper.append(cartItem)
-// }
 
 // rendering types of pokemons
 
@@ -166,7 +169,3 @@ elForm.addEventListener('submit', (e) =>{
     
     renderPokemons(typedPokemons, elList);
 });
-
-cartBtn.addEventListener('click', (e) =>{
-    
-})
